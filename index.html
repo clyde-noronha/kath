@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0a1828 0%, #1a3a4a 50%, #0f2027 100%);
+            height: 100vh;
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(10, 40, 50, 0.9), rgba(5, 20, 25, 1));
+        }
+
+        .flower-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 5%;
+        }
+
+        .flower {
+            position: relative;
+            transform-origin: bottom center;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .flower:nth-child(2n) {
+            animation-delay: -0.5s;
+        }
+
+        .flower:nth-child(3n) {
+            animation-delay: -1s;
+        }
+
+        .flower:nth-child(4n) {
+            animation-delay: -1.5s;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .stem {
+            width: 3px;
+            background: linear-gradient(to bottom, #4db8a0 0%, #3a9985 50%, #2d7a6b 100%);
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 0 8px rgba(77, 184, 160, 0.4);
+        }
+
+        .leaf {
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            background: linear-gradient(135deg, #5dc9ad 0%, #4db8a0 30%, #3a9985 70%, #2d7a6b 100%);
+            border-radius: 0 100% 100% 0;
+            box-shadow: 
+                0 0 8px rgba(77, 184, 160, 0.5),
+                inset 2px 2px 8px rgba(93, 201, 173, 0.4);
+        }
+
+        .leaf.left {
+            left: -22px;
+            transform: rotate(-45deg);
+        }
+
+        .leaf.right {
+            right: -22px;
+            transform: rotate(45deg) scaleX(-1);
+        }
+
+        .bloom {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .petal {
+            position: absolute;
+            width: 35px;
+            height: 45px;
+            background: radial-gradient(ellipse at 50% 30%, #ffffff 0%, #f5f5f5 40%, #e8e8e8 70%, #d0d0d0 100%);
+            border-radius: 50% 50% 48% 48%;
+            top: 50%;
+            left: 50%;
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 45px rgba(255, 255, 255, 0.3),
+                inset 0 -5px 15px rgba(255, 255, 255, 0.6),
+                inset 0 5px 10px rgba(200, 200, 200, 0.2);
+            animation: petalGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes petalGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 15px rgba(255, 255, 255, 0.8),
+                    0 0 30px rgba(255, 255, 255, 0.5),
+                    0 0 45px rgba(255, 255, 255, 0.3),
+                    inset 0 -5px 15px rgba(255, 255, 255, 0.6),
+                    inset 0 5px 10px rgba(200, 200, 200, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 40px rgba(255, 255, 255, 0.7),
+                    0 0 60px rgba(255, 255, 255, 0.5),
+                    inset 0 -5px 20px rgba(255, 255, 255, 0.8),
+                    inset 0 5px 15px rgba(200, 200, 200, 0.3);
+            }
+        }
+
+        .petal:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(0deg) translateY(-18px);
+        }
+
+        .petal:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(72deg) translateY(-18px);
+        }
+
+        .petal:nth-child(3) {
+            transform: translate(-50%, -50%) rotate(144deg) translateY(-18px);
+        }
+
+        .petal:nth-child(4) {
+            transform: translate(-50%, -50%) rotate(216deg) translateY(-18px);
+        }
+
+        .petal:nth-child(5) {
+            transform: translate(-50%, -50%) rotate(288deg) translateY(-18px);
+        }
+
+        .center {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle at 40% 40%, #d4f1f9 0%, #a8dff0 20%, #7dcce8 50%, #5ab8d6 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 
+                0 0 12px rgba(122, 204, 232, 0.9),
+                0 0 25px rgba(122, 204, 232, 0.6),
+                0 0 35px rgba(122, 204, 232, 0.3),
+                inset 0 0 12px rgba(212, 241, 249, 0.7),
+                inset -2px -2px 8px rgba(90, 184, 214, 0.5);
+            animation: centerGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes centerGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 12px rgba(122, 204, 232, 0.9),
+                    0 0 25px rgba(122, 204, 232, 0.6),
+                    0 0 35px rgba(122, 204, 232, 0.3),
+                    inset 0 0 12px rgba(212, 241, 249, 0.7),
+                    inset -2px -2px 8px rgba(90, 184, 214, 0.5);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 18px rgba(122, 204, 232, 1),
+                    0 0 35px rgba(122, 204, 232, 0.8),
+                    0 0 50px rgba(122, 204, 232, 0.5),
+                    inset 0 0 15px rgba(212, 241, 249, 0.9),
+                    inset -2px -2px 10px rgba(90, 184, 214, 0.7);
+            }
+        }
+
+        .grass {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 15%;
+        }
+
+        .grass-blade {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to top, #2d7a6b 0%, #3a9985 50%, #4db8a0 100%);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            animation: grassSway 2s ease-in-out infinite;
+        }
+
+        @keyframes grassSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .audio-control:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .message {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            font-size: 56px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            letter-spacing: 3px;
+            z-index: 10;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            50% { 
+                transform: translate(-50%, -50%) translateY(-20px);
+            }
+        }
+
+        .message span {
+            display: inline-block;
+            position: relative;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .message span::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.8;
+            color: white;
+        }
+
+        .message span::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 140%;
+            background: radial-gradient(ellipse at center, 
+                rgba(255, 255, 255, 0.6) 0%,
+                rgba(255, 255, 255, 0.4) 30%,
+                rgba(255, 255, 255, 0.2) 60%,
+                rgba(255, 255, 255, 0) 100%);
+            border-radius: 50%;
+            z-index: -2;
+            filter: blur(15px);
+            animation: cloudPuff 4s ease-in-out infinite;
+        }
+
+        @keyframes cloudPuff {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .message {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .message {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="ground"></div>
+    <div class="message">Happy Monthsary, my love!</div>
+    <div class="flower-container" id="flowerContainer"></div>
+    <div class="grass" id="grass"></div>
+    
+    <div class="audio-control" id="audioControl" title="Click to play/pause music">
+        🔇
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 70 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create flowers
+        const flowerContainer = document.getElementById('flowerContainer');
+        const flowerHeights = [180, 220, 160, 200, 190, 210, 170, 230, 195, 185, 175, 205];
+        
+        // Add cloud text effect
+        const message = document.querySelector('.message');
+        const text = message.textContent;
+        message.textContent = '';
+        
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.setAttribute('data-text', char === ' ' ? '\u00A0' : char);
+            span.style.animationDelay = (index * 0.05) + 's';
+            message.appendChild(span);
+        });
+        
+        flowerHeights.forEach((height, idx) => {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+            
+            const stem = document.createElement('div');
+            stem.className = 'stem';
+            stem.style.height = height + 'px';
+            
+            // Add multiple leaves at different heights
+            const numLeaves = Math.floor(Math.random() * 2) + 2;
+            for (let i = 0; i < numLeaves; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = i % 2 === 0 ? 'leaf left' : 'leaf right';
+                leaf.style.top = (height * (0.3 + i * 0.2)) + 'px';
+                stem.appendChild(leaf);
+            }
+            
+            const bloom = document.createElement('div');
+            bloom.className = 'bloom';
+            
+            // Create petals
+            for (let i = 0; i < 5; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.animationDelay = (idx * 0.2) + 's';
+                bloom.appendChild(petal);
+            }
+            
+            const center = document.createElement('div');
+            center.className = 'center';
+            center.style.animationDelay = (idx * 0.2) + 's';
+            bloom.appendChild(center);
+            
+            flower.appendChild(bloom);
+            flower.appendChild(stem);
+            flowerContainer.appendChild(flower);
+        });
+
+        // Create grass
+        const grassContainer = document.getElementById('grass');
+        for (let i = 0; i < 200; i++) {
+            const blade = document.createElement('div');
+            blade.className = 'grass-blade';
+            blade.style.left = Math.random() * 100 + '%';
+            blade.style.height = Math.random() * 50 + 30 + 'px';
+            blade.style.animationDelay = Math.random() * 2 + 's';
+            blade.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+            blade.style.opacity = 0.6 + Math.random() * 0.4;
+            grassContainer.appendChild(blade);
+        }
+
+        // Audio control
+        const audioControl = document.getElementById('audioControl');
+        let audio = new Audio('kath.mp3');
+        audio.loop = true;
+        let isPlaying = false;
+
+        audioControl.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                audioControl.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                audio.play();
+                audioControl.textContent = '🔊';
+                isPlaying = true;
+            }
+        });
+    </script>
+</body>
+</html>
