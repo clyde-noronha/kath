@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 2nd Monthsary!</title>
+    <title>Happy 3rd Monthsary, my love!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
@@ -15,12 +15,12 @@
         }
 
         :root {
-            --text-pink: #ffd1e1;
+            --text-pink: #fff5f8;
         }
 
         body {
             overflow: hidden;
-            background: linear-gradient(to bottom, #0a1828 0%, #1a3a4a 50%, #0f2027 100%);
+            background: linear-gradient(to bottom, #ff9a8b 0%, #ffad9b 20%, #ffc3a0 40%, #87ceeb 60%, #b0e0e6 80%, #e0f2f1 100%);
             height: 100vh;
             position: relative;
         }
@@ -32,16 +32,64 @@
             overflow: hidden;
         }
 
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            opacity: 0.7;
+            animation: floatCloud 20s infinite linear;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+        }
+
+        .cloud::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud::after {
+            width: 60px;
+            height: 60px;
+            top: -35px;
+            right: 10px;
+        }
+
+        @keyframes floatCloud {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
             animation: twinkle 3s infinite;
+            opacity: 0.1;
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.15; }
         }
 
         .ground {
@@ -49,7 +97,7 @@
             bottom: 0;
             width: 100%;
             height: 40%;
-            background: linear-gradient(to bottom, rgba(10, 40, 50, 0.9), rgba(5, 20, 25, 1));
+            background: linear-gradient(to bottom, rgba(144, 238, 144, 0.6), rgba(107, 142, 35, 0.8), rgba(85, 107, 47, 0.9));
         }
 
         .flower-container {
@@ -226,7 +274,7 @@
             position: absolute;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to top, #2d7a6b 0%, #3a9985 50%, #4db8a0 100%);
+            background: linear-gradient(to top, #6b8e23 0%, #7cb342 50%, #9ccc65 100%);
             border-radius: 50% 50% 0 0;
             transform-origin: bottom center;
             animation: grassSway 2s ease-in-out infinite;
@@ -253,6 +301,7 @@
             font-size: 24px;
             color: var(--text-pink);
             transition: background 0.3s;
+            z-index: 100;
         }
 
         .audio-control:hover {
@@ -276,6 +325,7 @@
                 0 0 18px rgba(255, 209, 225, 0.9),
                 0 0 35px rgba(255, 209, 225, 0.6),
                 0 5px 15px rgba(0, 0, 0, 0.25);
+            white-space: nowrap;
         }
 
         .countdown-wrapper {
@@ -444,8 +494,9 @@
 </head>
 <body>
     <div class="stars" id="stars"></div>
+    <div class="clouds" id="clouds"></div>
     <div class="ground"></div>
-    <div class="message">Happy 2nd Monthsary!</div>
+    <div class="message">Happy 3rd Monthsary, my love!</div>
     <div class="countdown-wrapper">
         <div class="countdown-timer" id="countdownTimer">
             <div class="time-unit">
@@ -486,6 +537,21 @@
             star.style.top = Math.random() * 70 + '%';
             star.style.animationDelay = Math.random() * 3 + 's';
             starsContainer.appendChild(star);
+        }
+
+        // Create clouds
+        const cloudsContainer = document.getElementById('clouds');
+        for (let i = 0; i < 8; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+            const size = Math.random() * 60 + 40;
+            cloud.style.width = size + 'px';
+            cloud.style.height = size * 0.6 + 'px';
+            cloud.style.top = Math.random() * 50 + 10 + '%';
+            cloud.style.animationDuration = (Math.random() * 20 + 15) + 's';
+            cloud.style.animationDelay = Math.random() * 5 + 's';
+            cloud.style.opacity = Math.random() * 0.3 + 0.5;
+            cloudsContainer.appendChild(cloud);
         }
 
         // Create flowers
@@ -575,16 +641,10 @@
             }
         });
 
-        // Countdown timer to December 27th
+        // Countdown timer to January 27th, 2026
         function updateCountdown() {
             const now = new Date();
-            const currentYear = now.getFullYear();
-            let targetDate = new Date(currentYear, 11, 27); // December 27th (month is 0-indexed)
-            
-            // If December 27th has already passed this year, target next year
-            if (now > targetDate) {
-                targetDate = new Date(currentYear + 1, 11, 27);
-            }
+            const targetDate = new Date(2026, 0, 27); // January 27th, 2026 (month is 0-indexed)
             
             const timeDifference = targetDate - now;
             
