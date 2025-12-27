@@ -326,6 +326,10 @@
                 0 0 35px rgba(255, 209, 225, 0.6),
                 0 5px 15px rgba(0, 0, 0, 0.25);
             white-space: nowrap;
+            width: 100%;
+            max-width: 95vw;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .countdown-wrapper {
@@ -444,19 +448,27 @@
 
         @media (max-width: 768px) {
             .message {
-                font-size: 36px;
+                font-size: clamp(24px, 6vw, 36px);
+                letter-spacing: 1.5px;
+                padding: 0 15px;
+                max-width: 98vw;
             }
             .countdown-wrapper {
                 top: 43%;
+                width: 100%;
+                max-width: 95vw;
+                padding: 0 10px;
             }
             .countdown-label {
                 font-size: 14px;
             }
             .countdown-timer {
                 font-size: 24px;
+                flex-wrap: wrap;
+                gap: 4px;
             }
             .countdown-timer .time-unit {
-                margin: 0 6px;
+                margin: 0 4px;
             }
             .countdown-timer .time-value {
                 font-size: 28px;
@@ -468,26 +480,34 @@
 
         @media (max-width: 480px) {
             .message {
-                font-size: 28px;
+                font-size: clamp(18px, 5.5vw, 28px);
+                letter-spacing: 1px;
+                padding: 0 10px;
+                max-width: 98vw;
             }
             .countdown-wrapper {
                 top: 41%;
+                width: 100%;
+                max-width: 98vw;
+                padding: 0 5px;
             }
             .countdown-label {
                 font-size: 12px;
             }
             .countdown-timer {
-                font-size: 20px;
+                font-size: clamp(16px, 4vw, 20px);
+                flex-wrap: wrap;
+                gap: 2px;
             }
             .countdown-timer .time-value {
-                font-size: 24px;
+                font-size: clamp(20px, 5vw, 24px);
             }
             .countdown-timer .time-label {
                 font-size: 12px;
             }
             .countdown-timer .time-unit {
-                margin: 0 4px;
-                padding: 4px 6px;
+                margin: 0 2px;
+                padding: 4px 4px;
             }
         }
     </style>
