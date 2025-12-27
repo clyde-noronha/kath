@@ -45,7 +45,12 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 50px;
             opacity: 0.7;
-            animation: floatCloud 20s infinite linear;
+            box-shadow: 
+                20px 20px 0 -10px rgba(255, 255, 255, 0.8),
+                -20px 20px 0 -10px rgba(255, 255, 255, 0.8),
+                40px -10px 0 -15px rgba(255, 255, 255, 0.8),
+                -40px -10px 0 -15px rgba(255, 255, 255, 0.8),
+                0 -30px 0 -10px rgba(255, 255, 255, 0.8);
         }
 
         .cloud::before,
@@ -57,27 +62,25 @@
         }
 
         .cloud::before {
-            width: 50px;
-            height: 50px;
-            top: -25px;
-            left: 10px;
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+            box-shadow: 
+                30px 0 0 -5px rgba(255, 255, 255, 0.8),
+                -20px 15px 0 -8px rgba(255, 255, 255, 0.8);
         }
 
         .cloud::after {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             top: -35px;
-            right: 10px;
+            right: 15px;
+            box-shadow: 
+                -30px 0 0 -5px rgba(255, 255, 255, 0.8),
+                20px 15px 0 -8px rgba(255, 255, 255, 0.8);
         }
 
-        @keyframes floatCloud {
-            0% {
-                transform: translateX(-100px);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px));
-            }
-        }
 
         .star {
             position: absolute;
@@ -561,16 +564,44 @@
 
         // Create clouds
         const cloudsContainer = document.getElementById('clouds');
-        for (let i = 0; i < 8; i++) {
+        const numClouds = 15;
+        const cloudPositions = [];
+        
+        // Create clouds with better spacing
+        for (let i = 0; i < numClouds; i++) {
             const cloud = document.createElement('div');
             cloud.className = 'cloud';
-            const size = Math.random() * 60 + 40;
+            
+            // Vary cloud sizes more
+            const size = Math.random() * 80 + 50;
             cloud.style.width = size + 'px';
             cloud.style.height = size * 0.6 + 'px';
-            cloud.style.top = Math.random() * 50 + 10 + '%';
-            cloud.style.animationDuration = (Math.random() * 20 + 15) + 's';
-            cloud.style.animationDelay = Math.random() * 5 + 's';
+            
+            // Better distribution: restrict to top 40% to avoid covering flowers
+            let attempts = 0;
+            let top, left;
+            let tooClose = true;
+            
+            // Ensure clouds are well-spread and only in upper sky
+            while (tooClose && attempts < 50) {
+                top = Math.random() * 35 + 5 + '%'; // Top 5% to 40% only
+                left = Math.random() * 95 + '%';
+                
+                tooClose = cloudPositions.some(pos => {
+                    const distance = Math.sqrt(
+                        Math.pow(parseFloat(top) - parseFloat(pos.top), 2) +
+                        Math.pow(parseFloat(left) - parseFloat(pos.left), 2)
+                    );
+                    return distance < 15; // Minimum distance between clouds
+                });
+                attempts++;
+            }
+            
+            cloud.style.top = top;
+            cloud.style.left = left;
             cloud.style.opacity = Math.random() * 0.3 + 0.5;
+            
+            cloudPositions.push({ top, left });
             cloudsContainer.appendChild(cloud);
         }
 
